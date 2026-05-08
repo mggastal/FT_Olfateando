@@ -1,0 +1,12 @@
+{
+  "cliente": "Olfateando",
+  "cor": "#0ea5e9",
+  "letra": "OL",
+  "lancamento": "CI02",
+  "atualizado": "08/05/2026",
+  "kpis": {
+    "spend": 645.78,
+    "leads": 196,
+    "cpl": 3.29
+  }
+}
