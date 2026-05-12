@@ -3,7 +3,9 @@
   "cor": "#0ea5e9",
   "letra": "OL",
   "lancamento": "CI02",
-  "atualizado": "11/05/2026",
+  "moeda": "USD",
+  "moeda_simbolo": "$",
+  "atualizado": "12/05/2026",
   "kpis": {
     "spend": 3014.55,
     "leads": 882,
