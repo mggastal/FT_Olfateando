@@ -18,7 +18,7 @@ LOGO_LETRA       = "OL"
 COR_ACENTO       = "#0ea5e9"
 
 LANCAMENTO_COD   = "CI02"        # filtra campanhas; "" = ver tudo
-USAR_PESQUISA    = False          # False = oculta aba Pesquisa
+USAR_PESQUISA    = True          # False = oculta aba Pesquisa
 
 # ══ MOEDA ══════════════════════════════════════════════
 # Escolha a moeda do cliente:
