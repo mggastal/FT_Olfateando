@@ -5,10 +5,10 @@
   "lancamento": "CI02",
   "moeda": "USD",
   "moeda_simbolo": "$",
-  "atualizado": "18/05/2026",
+  "atualizado": "19/05/2026",
   "kpis": {
-    "spend": 8659.36,
-    "leads": 2303,
+    "spend": 8660.24,
+    "leads": 2304,
     "cpl": 3.76
   }
 }
