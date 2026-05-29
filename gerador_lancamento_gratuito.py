@@ -19,6 +19,7 @@ COR_ACENTO       = "#0ea5e9"
 
 LANCAMENTO_COD   = "CI02"        # filtra campanhas; "" = ver tudo
 USAR_PESQUISA    = True          # False = oculta aba Pesquisa
+USAR_VENDAS      = True             # False = oculta menu Vendas (Hotmart)
 
 # ══ MOEDA ══════════════════════════════════════════════
 # Escolha a moeda do cliente:
