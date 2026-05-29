@@ -21,7 +21,7 @@ LANCAMENTO_COD   = "CI02"        # filtra campanhas; "" = ver tudo
 USAR_PESQUISA    = True          # False = oculta aba Pesquisa
 USAR_VENDAS      = True             # False = oculta menu Vendas (Hotmart)
 
-# ══ MOEDA ══════════════════════════════════════════════
+# ══ MOEDA ═════════════════════════════════════════════
 # Escolha a moeda do cliente:
 #   "BRL"  → R$ (Real Brasileiro)
 #   "USD"  → $ (Dólar Americano)
