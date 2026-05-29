@@ -373,16 +373,22 @@ def hotmart_data():
 
         # Temperatura
         camp_col=df["utm_camp"].fillna("").astype(str).str.upper()
-        df["temp"]=camp_col.apply(lambda x:"Quente" if "QUENTE" in x else("Frio" if "FRIO" in x else "Sem rastreio"))
+        df["temp"]=camp_col.apply(lambda x:"Quente" if "TT" in x else("Frio" if "TF" in x else "Sem rastreio"))
         tg=df.groupby("temp").agg(v=("price","count"),r=("price","sum")).reset_index()
         tg["_o"]=tg["temp"].map({"Quente":0,"Frio":1,"Sem rastreio":2})
         temperatura=[{"n":str(r["temp"]),"v":int(r["v"]),"r":round(float(r["r"]),2)} for _,r in tg.sort_values("_o").iterrows()]
 
         # Pagamentos
         def fmt_pgto(m):
-            return "PIX" if ("ONEY" in str(m).upper() or "FINANCED" in str(m).upper()) else "Cartão de Crédito"
+            m2 = str(m).strip().lower()
+            if 'parcel' in m2: return 'Parcelado'
+            if 'complet' in m2: return 'Completo'
+            return str(m).strip() if m and str(m)!='nan' else 'Outro'
         def fmt_pgto_full(m):
-            return "PIX" if ("ONEY" in str(m).upper() or "FINANCED" in str(m).upper()) else "Cartão de Crédito"
+            m2 = str(m).strip().lower()
+            if 'parcel' in m2: return 'Parcelado'
+            if 'complet' in m2: return 'Completo'
+            return str(m).strip() if m and str(m)!='nan' else 'Outro' 
         df["tipo_pgto"]=df["pgto_raw"].fillna("").apply(fmt_pgto)
         pg=df.groupby("tipo_pgto").agg(v=("price","count"),r=("price","sum")).reset_index().sort_values("v",ascending=False)
         pagamentos=[{"n":str(r["tipo_pgto"]),"v":int(r["v"]),"r":round(float(r["r"]),2)} for _,r in pg.iterrows()]
@@ -422,7 +428,7 @@ def hotmart_data():
             canal_v="Sem rastreio" if canal_v in ("","nan") else canal_v
             camp_v=str(row.get("utm_camp","")) if pd.notna(row.get("utm_camp","")) else ""
             pgto_v=fmt_pgto(row.get("pgto_raw",""))
-            temp_v="Quente" if "QUENTE" in camp_v.upper() else("Frio" if "FRIO" in camp_v.upper() else "Sem rastreio")
+            temp_v="Quente" if "TT" in camp_v.upper() else("Frio" if "TF" in camp_v.upper() else "Sem rastreio")
             raw_rows.append({"d":row["date"].strftime("%d/%m"),"r":round(float(row["price"]),2),
                 "sck":sck_v,"canal":canal_v,"camp":camp_v if camp_v not in("","nan","NaN") else "",
                 "temp":temp_v,"pgto":pgto_v})
@@ -485,7 +491,7 @@ def pesquisa_process(df, total_leads):
 # ══ INJEÇÃO ════════════════════════════════════════════
 def replace_js_const(html, name, value):
     replacement = f"const {name} = {json.dumps(value, ensure_ascii=False)};"
-    pattern_start = re.compile(rf"const {name}\\s*=\\s*")
+    pattern_start = re.compile(rf"const {name}\s*=\s*")
     m = pattern_start.search(html)
     if not m:
         print(f"  AVISO: nao encontrou const {name}")
