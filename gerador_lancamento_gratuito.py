@@ -21,7 +21,7 @@ LANCAMENTO_COD   = "CI02"        # filtra campanhas; "" = ver tudo
 USAR_PESQUISA    = True          # False = oculta aba Pesquisa
 USAR_VENDAS      = True             # False = oculta menu Vendas (Hotmart)
 
-# ══ MOEDA ═════════════════════════════════════════════
+# ══ MOEDA ══════════════════════════════════════════════
 # Escolha a moeda do cliente:
 #   "BRL"  → R$ (Real Brasileiro)
 #   "USD"  → $ (Dólar Americano)
@@ -484,13 +484,32 @@ def pesquisa_process(df, total_leads):
 
 # ══ INJEÇÃO ════════════════════════════════════════════
 def replace_js_const(html, name, value):
-    pattern=rf"const {name}\s*=\s*(?:null|true|false|-?\d[\d\.]*|'[^']*'|\"[^\"]*\"|\{{[\s\S]*?\}}|\[[\s\S]*?\])\s*;"
-    replacement=f"const {name} = {json.dumps(value,ensure_ascii=False)};"
-    found=[0]
-    def do_replace(m): found[0]+=1; return replacement
-    new_html=re.sub(pattern,do_replace,html,count=1)
-    if not found[0]: print(f"  AVISO: não encontrou const {name}")
-    return new_html
+    replacement = f"const {name} = {json.dumps(value, ensure_ascii=False)};"
+    pattern_start = re.compile(rf"const {name}\\s*=\\s*")
+    m = pattern_start.search(html)
+    if not m:
+        print(f"  AVISO: nao encontrou const {name}")
+        return html
+    start = m.start()
+    val_start = m.end()
+    i = val_start
+    depth = 0
+    in_str = False
+    str_char = None
+    while i < len(html):
+        ch = html[i]
+        if in_str:
+            if ch == '\\': i += 2; continue
+            if ch == str_char: in_str = False
+        else:
+            if ch in ('"', "'", '`'): in_str = True; str_char = ch
+            elif ch in ('{', '['): depth += 1
+            elif ch in ('}', ']'): depth -= 1
+            elif ch == ';' and depth == 0: break
+        i += 1
+    end = i + 1
+    html = html[:start] + replacement + html[end:]
+    return html
 
 def inject_all(tpl, meta_k, meta_d, meta_dc, meta_raw_c, meta_t, meta_bd, pes, hotmart):
     html=Path(tpl).read_text(encoding="utf-8")
