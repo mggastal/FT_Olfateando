@@ -224,6 +224,11 @@ details.desk-only{display:block!important;}
     <button class="sb-item active" onclick="goPage('meta',this)"><span class="ico">🎯</span><span data-i18n="nav_meta">Meta Ads</span></button>
     <button class="sb-item" onclick="goPage('diario',this)"><span class="ico">📈</span><span data-i18n="nav_diario">Métricas Diárias</span></button>
     <button class="sb-item" id="sbPesquisa" onclick="goPage('pesquisa',this)"><span class="ico">🔍</span><span data-i18n="nav_pesquisa">Pesquisa</span></button>
+    <div id="sbVendasGroup" style="display:none">
+      <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1.5px;padding:12px 10px 4px">Vendas</div>
+      <button class="sb-item" onclick="goPage('vendas',this)"><span class="ico">💰</span>Visão Geral</button>
+      <button class="sb-item" onclick="goPage('vendas-lista',this)"><span class="ico">📋</span>Vendas Diárias</button>
+    </div>
   </nav>
   <div class="sb-lct"><div class="sb-lct-lbl" data-i18n="launch">Lançamento</div><div class="sb-lct-val" id="sbLct">—</div></div>
 
@@ -1700,7 +1705,7 @@ function tblVendas(elId, data, colLbl, receitaCor){
 function renderVendas(){
   if(!HOTMART) return;
   const HM=HOTMART;
-  const fRec=v=>v==null?'—':'R$'+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const fRec=v=>fR(v);
   const HL=getComputedStyle(document.documentElement).getPropertyValue('--hotmart').trim()||'#ff6b00';
 
   // Filtrar daily pelo período
