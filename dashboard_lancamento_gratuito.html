@@ -226,8 +226,7 @@ details.desk-only{display:block!important;}
     <button class="sb-item" id="sbPesquisa" onclick="goPage('pesquisa',this)"><span class="ico">🔍</span><span data-i18n="nav_pesquisa">Pesquisa</span></button>
     <div id="sbVendasGroup" style="display:none">
       <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1.5px;padding:12px 10px 4px">Vendas</div>
-      <button class="sb-item" onclick="goPage('vendas',this)"><span class="ico">💰</span>Visão Geral</button>
-      <button class="sb-item" onclick="goPage('vendas-lista',this)"><span class="ico">📋</span>Vendas Diárias</button>
+      <button class="sb-item" onclick="goPage('vendas',this)"><span class="ico">💰</span><span data-i18n="nav_vendas">Visão Geral</span></button>
     </div>
   </nav>
   <div class="sb-lct"><div class="sb-lct-lbl" data-i18n="launch">Lançamento</div><div class="sb-lct-val" id="sbLct">—</div></div>
@@ -341,85 +340,59 @@ details.desk-only{display:block!important;}
     </div>
 
 
-    <!-- VENDAS LISTA -->
-    <div class="page-section" id="page-vendas-lista">
-      <div style="margin-bottom:16px">
-        <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700">Vendas Diárias</div>
-        <div style="font-size:12px;color:var(--muted)">Todas as vendas aprovadas · período do lançamento</div>
-      </div>
-      <!-- Análise Diária - gráficos por hora -->
-      <div style="margin-bottom:6px">
-        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;margin-bottom:2px">Análise Diária</div>
-        <div style="font-size:11px;color:var(--muted2);margin-bottom:12px">Vendas acumuladas por horário em cada dia do lançamento</div>
-        <div id="vendasHoraGrid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px;max-width:100%;overflow:hidden"></div>
-      </div>
 
-      <div class="cc mb14" style="padding:0">
-        <div style="overflow-x:auto">
-          <table id="tblVendasLista" style="width:100%;border-collapse:collapse;min-width:480px">
-            <thead><tr style="background:var(--surface2)">
-              <th style="font-size:9px;padding:8px 12px;text-align:left;color:var(--muted);text-transform:uppercase;white-space:nowrap">Data</th>
-              <th style="font-size:9px;padding:8px 12px;text-align:left;color:var(--muted);text-transform:uppercase;white-space:nowrap">E-mail</th>
-              <th class="num" style="font-size:9px;padding:8px 12px;color:var(--muted);text-transform:uppercase;white-space:nowrap">Valor</th>
-              <th style="font-size:9px;padding:8px 12px;text-align:left;color:var(--muted);text-transform:uppercase;white-space:nowrap">Campanha</th>
-            </tr></thead>
-            <tbody id="tblVendasListaBody"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
 
     <!-- VENDAS -->
     <div class="page-section" id="page-vendas">
       <div style="margin-bottom:16px">
-        <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700">Vendas</div>
-        <div style="font-size:12px;color:var(--muted)">Vendas aprovadas · período do lançamento</div>
+        <div style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700" data-i18n="v_titulo_geral">Vendas</div>
+        <div style="font-size:12px;color:var(--muted)" data-i18n="v_sub_geral">Vendas aprovadas · período do lançamento</div>
       </div>
       <!-- KPIs -->
       <div class="krow k3 mb14" id="vendasKpis"></div>
       <!-- Gráfico diário -->
       <div class="cc mb14">
-        <div class="cc-t" style="color:var(--hotmart)">Vendas por Dia</div>
-        <div class="cc-s">Quantidade de vendas (barras) · Receita bruta (linha)</div>
+        <div class="cc-t" style="color:var(--hotmart)" data-i18n="v_chart_ttl">Vendas por Dia</div>
+        <div class="cc-s" data-i18n="v_chart_sub">Quantidade de vendas (barras) · Receita bruta (linha)</div>
         <div class="cw" style="height:210px"><canvas id="chVendasDia"></canvas></div>
       </div>
       <!-- Aviso dados gerais -->
       <div style="margin:4px 0 14px;padding:10px 14px;background:var(--surface2);border-left:3px solid var(--muted2);border-radius:var(--r)">
-        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px">Visão Geral do Lançamento</div>
-        <div style="font-size:11px;color:var(--muted2)">Os dados abaixo são acumulados do período completo e não seguem o filtro de data.</div>
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px" data-i18n="v_aviso_ttl">Visão Geral do Lançamento</div>
+        <div style="font-size:11px;color:var(--muted2)" data-i18n="v_aviso_sub">Os dados abaixo são acumulados do período completo e não seguem o filtro de data.</div>
       </div>
       <!-- Gráficos pizza: quente x frio e pagamentos -->
       <div class="g2 mb14">
         <div class="cc">
-          <div class="cc-t">Temperatura do Lead (Quente × Frio)</div>
-          <div class="cc-s">Por campanha de captação</div>
+          <div class="cc-t" data-i18n="v_temperatura">Temperatura do Lead (Quente × Frio)</div>
+          <div class="cc-s" data-i18n="v_temp_sub">Por campanha de captação</div>
           <div class="cw" style="height:180px"><canvas id="chVendasTemp"></canvas></div>
         </div>
         <div class="cc">
-          <div class="cc-t">Método de Pagamento</div>
-          <div class="cc-s">Quantidade de vendas por forma de pagamento</div>
+          <div class="cc-t" data-i18n="v_pgto">Método de Pagamento</div>
+          <div class="cc-s" data-i18n="v_pgto_sub">Quantidade de vendas por forma de pagamento</div>
           <div class="cw" style="height:180px"><canvas id="chVendasPgto"></canvas></div>
         </div>
       </div>
       <!-- Tabelas empilhadas -->
       <div class="section">
-        <div class="sec-hd">Origem — Canal (SCK) · Último clique antes da compra</div>
+        <div class="sec-hd" data-i18n="v_orig_canal">Origem — Canal (SCK) · Último clique antes da compra</div>
         <div class="tc" id="vendasSck"></div>
       </div>
       <div class="section">
-        <div class="sec-hd">Origem — Campanha (UTM) · Captação</div>
+        <div class="sec-hd" data-i18n="v_orig_camp">Origem — Campanha (UTM) · Captação</div>
         <div class="tc" id="vendasUtm"></div>
       </div>
       <div class="section">
-        <div class="sec-hd">Origem — Público (UTM) · Captação</div>
+        <div class="sec-hd" data-i18n="v_orig_pub">Origem — Público (UTM) · Captação</div>
         <div class="tc" id="vendasPublicos"></div>
       </div>
       <div class="section">
-        <div class="sec-hd">Origem — Criativo (UTM) · Captação</div>
+        <div class="sec-hd" data-i18n="v_orig_criat">Origem — Criativo (UTM) · Captação</div>
         <div class="tc" id="vendasCriativos"></div>
       </div>
       <div class="section">
-        <div class="sec-hd">SCK Detalhado · Último clique</div>
+        <div class="sec-hd" data-i18n="v_sck_det">SCK Detalhado · Último clique</div>
         <div class="tc" id="vendasSckDetalhe"></div>
       </div>
     </div>
@@ -542,6 +515,41 @@ const TRANSLATIONS = {
     seg_col_invest:   'Invest.',
     seg_col_leads:    'Leads',
     seg_col_cpl:      'CPL',
+    // Vendas
+    nav_vendas:       'Vendas',
+    nav_vendas_lista: 'Vendas Diárias',
+    v_titulo_lista:   'Vendas Diárias',
+    v_sub_lista:      'Todas as vendas aprovadas · período do lançamento',
+    v_analise_dia:    'Análise Diária',
+    v_analise_sub:    'Vendas acumuladas por horário em cada dia do lançamento',
+    v_titulo_geral:   'Vendas',
+    v_sub_geral:      'Vendas aprovadas · período do lançamento',
+    v_chart_ttl:      'Vendas por Dia',
+    v_chart_sub:      'Quantidade de vendas (barras) · Receita bruta (linha)',
+    v_aviso_ttl:      'Visão Geral do Lançamento',
+    v_aviso_sub:      'Os dados abaixo são acumulados do período completo e não seguem o filtro de data.',
+    v_temperatura:    'Temperatura do Lead (Quente × Frio)',
+    v_temp_sub:       'Por campanha de captação',
+    v_pgto:           'Método de Pagamento',
+    v_pgto_sub:       'Quantidade de vendas por forma de pagamento',
+    v_orig_canal:     'Origem — Canal (SCK) · Último clique antes da compra',
+    v_orig_camp:      'Origem — Campanha (UTM) · Captação',
+    v_orig_pub:       'Origem — Público (UTM) · Captação',
+    v_orig_criat:     'Origem — Criativo (UTM) · Captação',
+    v_sck_det:        'SCK Detalhado · Último clique',
+    v_sck_col:        'SCK Completo',
+    v_receita:        'Receita Bruta',
+    v_receita_sub:    'vendas aprovadas',
+    v_vendas:         'Vendas',
+    v_vendas_sub:     'transações aprovadas',
+    v_ticket:         'Ticket Médio',
+    v_ticket_sub:     'por venda',
+    v_vendas_col:     'Vendas',
+    v_receita_col:    'Receita',
+    v_hora_esta:      'vendas nesta hora',
+    v_hora_acum:      'acumuladas',
+    v_venda_s:        'venda',
+    v_vendas_s:       'vendas',
   },
   ES: {
     launch:           'Lanzamiento',
@@ -613,6 +621,42 @@ const TRANSLATIONS = {
     seg_col_invest:   'Inversión',
     seg_col_leads:    'Leads',
     seg_col_cpl:      'CPL',
+    // Vendas
+    nav_vendas:       'Ventas',
+    nav_vendas_lista: 'Ventas Diarias',
+    v_titulo_lista:   'Ventas Diarias',
+    v_sub_lista:      'Todas las ventas aprobadas · período del lanzamiento',
+    v_analise_dia:    'Análisis Diario',
+    v_analise_sub:    'Ventas acumuladas por horario en cada día del lanzamiento',
+    v_titulo_geral:   'Ventas',
+    v_sub_geral:      'Ventas aprobadas · período del lanzamiento',
+    v_chart_ttl:      'Ventas por Día',
+    v_chart_sub:      'Cantidad de ventas (barras) · Ingresos brutos (línea)',
+    v_aviso_ttl:      'Vista General del Lanzamiento',
+    v_aviso_sub:      'Los datos a continuación son acumulados del período completo y no siguen el filtro de fecha.',
+    v_temperatura:    'Temperatura del Lead (Caliente × Frío)',
+    v_temp_sub:       'Por campaña de captación',
+    v_pgto:           'Método de Pago',
+    v_pgto_sub:       'Cantidad de ventas por forma de pago',
+    v_orig_canal:     'Origen — Canal (SCK) · Último clic antes de la compra',
+    v_orig_camp:      'Origen — Campaña (UTM) · Captación',
+    v_orig_pub:       'Origen — Público (UTM) · Captación',
+    v_orig_criat:     'Origen — Creativo (UTM) · Captación',
+    v_sck_det:        'SCK Detallado · Último clic',
+    v_sck_col:        'SCK Completo',
+    v_receita:        'Ingresos Brutos',
+    v_receita_sub:    'ventas aprobadas',
+    v_vendas:         'Ventas',
+    v_vendas_sub:     'transacciones aprobadas',
+    v_ticket:         'Ticket Promedio',
+    v_ticket_sub:     'por venta',
+    v_vendas_col:     'Ventas',
+    v_receita_col:    'Ingresos',
+    v_sck_col:        'SCK Completo',
+    v_hora_esta:      'ventas en esta hora',
+    v_hora_acum:      'acumuladas',
+    v_venda_s:        'venta',
+    v_vendas_s:       'ventas',
   }
 };
 
@@ -626,7 +670,7 @@ function applyI18n(){
     el.textContent=t(key);
   });
   // Atualiza título da página e topbar
-  const titles={meta:t('nav_meta'),diario:t('nav_diario'),pesquisa:t('nav_pesquisa'),'vendas':'Vendas','vendas-lista':'Vendas Diárias'};
+  const titles={meta:t('nav_meta'),diario:t('nav_diario'),pesquisa:t('nav_pesquisa'),vendas:t('nav_vendas')};
   const activeP=document.querySelector('.page-section.active')?.id?.replace('page-','');
   if(activeP && titles[activeP]) document.getElementById('pageTitle').textContent=titles[activeP];
   // Atualiza themeLabel baseado no tema atual
@@ -641,7 +685,12 @@ function setLang(lang, btn){
   document.querySelectorAll('.lang-bar .pb').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   applyI18n();
-  rerenderActive();
+  // Re-renderizar tudo para atualizar textos gerados por t() no JS
+  renderMeta();
+  renderDiario();
+  if(PESQUISA) renderPesquisa();
+  if(HOTMART&&HOTMART!==false){ renderVendas(); }
+  setTimeout(()=>{Object.values({...CH,...PC}).forEach(c=>{try{c.resize();}catch(e){}});},60);
 }
 
 // ═══ FORMATAÇÃO DE MOEDA ══════════════════════════════════
@@ -1563,90 +1612,6 @@ function buildPizzas(){
   });
 }
 
-// ═══ TABELA DE VENDAS DIÁRIAS ═══
-function renderVendasLista(){
-  if(!HOTMART?.vendas_raw?.length) return;
-  const fRec=v=>fR(v);
-  const HL=getComputedStyle(document.documentElement).getPropertyValue('--hotmart').trim()||'#ff6b00';
-  const rows=HOTMART.vendas_raw;
-
-  // Agregar por dia e hora
-  const diasMap={};
-  rows.forEach(r=>{
-    if(!diasMap[r.dia]) diasMap[r.dia]=new Array(24).fill(0);
-    if(r.hora>=0&&r.hora<24) diasMap[r.dia][r.hora]++;
-  });
-  const dias=Object.keys(diasMap).sort();
-  const grid=document.getElementById('vendasHoraGrid');
-  if(grid){
-    Object.keys(CH).filter(k=>k.startsWith('chHora_')).forEach(k=>{try{CH[k].destroy();}catch(e){}delete CH[k];});
-    grid.innerHTML='';
-    dias.forEach(dia=>{
-      const horas=diasMap[dia];
-      const total=horas.reduce((a,b)=>a+b,0);
-      // Linha cumulativa: somar hora a hora
-      const cumul=[];let acc=0;
-      for(let h=0;h<24;h++){acc+=horas[h];cumul.push(acc);}
-      const id='chHora_'+dia.replace('/','_');
-      const card=document.createElement('div');
-      card.style.cssText='background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:10px 10px 8px;box-shadow:var(--sh);min-width:0;overflow:hidden';
-      card.innerHTML='<div style="font-size:10px;font-weight:700;margin-bottom:6px;color:var(--text)">'+dia+' <span style="color:'+HL+';font-weight:700">'+total+' venda'+(total!==1?'s':'')+'</span></div><div style="height:100px"><canvas id="'+id+'"></canvas></div>';
-      grid.appendChild(card);
-      setTimeout(()=>{
-        const ctx=document.getElementById(id);
-        if(!ctx) return;
-        const labels=Array.from({length:24},(_,i)=>i%4===0?String(i).padStart(2,'0')+'h':'');
-        CH[id]=new Chart(ctx,{type:'bar',
-          data:{labels,datasets:[
-            {
-              type:'bar',
-              data:horas,
-              backgroundColor:HL+'55',
-              borderRadius:2,
-              yAxisID:'y',
-              datalabels:{display:false}
-            },
-            {
-              type:'line',
-              data:cumul,
-              borderColor:HL,backgroundColor:'transparent',
-              tension:.4,pointRadius:0,pointHoverRadius:5,borderWidth:2,
-              yAxisID:'y2',
-              datalabels:{display:false}
-            }
-          ]},
-          options:{responsive:true,maintainAspectRatio:false,
-            interaction:{mode:'index',intersect:false},
-            plugins:{legend:{display:false},
-              tooltip:{mode:'index',intersect:false,callbacks:{
-                title:ctx=>'Hora '+String(ctx[0].dataIndex).padStart(2,'0')+':00',
-                label:ctx=>ctx.datasetIndex===0
-                  ?ctx.raw+' venda'+(ctx.raw!==1?'s nesta hora':'')
-                  :ctx.raw+' acumulada'+(ctx.raw!==1?'s':'')
-              }}},
-            scales:{
-              x:{ticks:{color:TXT(),font:{size:7},maxRotation:0},grid:{display:false}},
-              y:{ticks:{color:TXT(),font:{size:7},stepSize:1},grid:{color:GRID()},min:0,max:total||1},
-              y2:{display:false,min:0,max:total||1}
-            }}
-        });
-      },50);
-    });
-  }
-
-  // Tabela
-  let html='';
-  rows.forEach(r=>{
-    html+='<tr style="border-bottom:1px solid var(--border)">'+
-      '<td style="font-size:11px;padding:7px 12px;white-space:nowrap;color:var(--muted)">'+r.d+'</td>'+
-      '<td style="font-size:11px;padding:7px 12px;white-space:nowrap;color:var(--muted)">'+r.email+'</td>'+
-      '<td class="num" style="font-size:11px;padding:7px 12px;color:'+HL+';font-weight:700;white-space:nowrap">'+fRec(r.valor)+'</td>'+
-      '<td style="font-size:10px;padding:7px 12px;max-width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)" title="'+r.camp+'">'+r.camp+'</td>'+
-    '</tr>';
-  });
-  document.getElementById('tblVendasListaBody').innerHTML=html;
-}
-
 
 // ═══ VENDAS ═══
 function isSem(n){return /^(sem |e-mail não encontrado)/i.test(n);}
@@ -1729,16 +1694,16 @@ function renderVendas(){
   const roacCor=roasGeral==null?'var(--muted)':roasGeral>=3?'#059669':roasGeral>=1?'#d97706':'#dc2626';
 
   document.getElementById('vendasKpis').innerHTML=
-    '<div class="kpi" style="--kc:'+HL+'"><div class="kpi-lbl">Receita Bruta</div><div class="kpi-val" style="font-size:18px;color:'+HL+'">'+fRec(totReceita)+'</div><div class="kpi-sub">vendas aprovadas</div></div>'+
-    '<div class="kpi" style="--kc:#334155"><div class="kpi-lbl">Vendas</div><div class="kpi-val">'+totVendas+'</div><div class="kpi-sub">transações aprovadas</div></div>'+
-    '<div class="kpi" style="--kc:#334155"><div class="kpi-lbl">Ticket Médio</div><div class="kpi-val">'+fRec(ticket)+'</div><div class="kpi-sub">por venda</div></div>';
+    '<div class="kpi" style="--kc:'+HL+'"><div class="kpi-lbl">'+t('v_receita')+'</div><div class="kpi-val" style="font-size:18px;color:'+HL+'">'+fRec(totReceita)+'</div><div class="kpi-sub">'+t('v_receita_sub')+'</div></div>'+
+    '<div class="kpi" style="--kc:#334155"><div class="kpi-lbl">'+t('v_vendas')+'</div><div class="kpi-val">'+totVendas+'</div><div class="kpi-sub">'+t('v_vendas_sub')+'</div></div>'+
+    '<div class="kpi" style="--kc:#334155"><div class="kpi-lbl">'+t('v_ticket')+'</div><div class="kpi-val">'+fRec(ticket)+'</div><div class="kpi-sub">'+t('v_ticket_sub')+'</div></div>';
 
   dc('chVendasDia');
   CH['chVendasDia']=new Chart(document.getElementById('chVendasDia'),{
     data:{labels:hd.days,datasets:[
-      {label:'Vendas',data:hd.vendas,backgroundColor:HL+'bb',borderRadius:4,type:'bar',yAxisID:'y1',
+      {label:t('v_vendas'),data:hd.vendas,backgroundColor:HL+'bb',borderRadius:4,type:'bar',yAxisID:'y1',
        datalabels:{display:ctx=>showLabels,color:HL,font:{size:labelSize,weight:'bold'},anchor:'end',align:'top',offset:2,clip:false}},
-      {label:'Receita',data:hd.receita,borderColor:'#059669',backgroundColor:'transparent',tension:.3,pointRadius:3,borderWidth:2,type:'line',yAxisID:'y2',spanGaps:true,datalabels:{display:false}},
+      {label:t('v_receita'),data:hd.receita,borderColor:'#059669',backgroundColor:'transparent',tension:.3,pointRadius:3,borderWidth:2,type:'line',yAxisID:'y2',spanGaps:true,datalabels:{display:false}},
     ]},
     options:{...bo(),scales:{
       x:{ticks:{color:TXT(),font:bf},grid:{color:GRID()}},
@@ -1757,7 +1722,7 @@ function renderVendas(){
     data:{labels:tempData.map(t=>t.n),datasets:[{data:tempData.map(t=>t.v),backgroundColor:tempData.map(t=>TEMP_COLS[t.n]||'#9ca3af'),borderWidth:0}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{
       legend:{position:'right',labels:{color:TXT(),font:bf,padding:10}},
-      tooltip:{callbacks:{label:ctx=>{const t=tempData[ctx.dataIndex];return ' '+t.v+' vendas · '+fRec(t.r);}}},
+      tooltip:{callbacks:{label:ctx=>{const t=tempData[ctx.dataIndex];return ' '+t.v+' '+t('v_vendas_s')+' · '+fRec(t.r);}}},
       datalabels:{display:true,color:'#fff',font:{size:10,weight:'bold'},formatter:(v,ctx)=>{const tot=ctx.dataset.data.reduce((a,b)=>a+b,0);return tot>0?(v/tot*100).toFixed(0)+'%':null;}}
     }}
   });
@@ -1767,7 +1732,7 @@ function renderVendas(){
     data:{labels:HM.pagamentos.map(p=>p.n),datasets:[{data:HM.pagamentos.map(p=>p.v),backgroundColor:PGTO_COLS.slice(0,HM.pagamentos.length),borderWidth:0}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{
       legend:{position:'right',labels:{color:TXT(),font:bf,padding:10}},
-      tooltip:{callbacks:{label:ctx=>{const p=HM.pagamentos[ctx.dataIndex];return ' '+p.v+' vendas · '+fRec(p.r);}}},
+      tooltip:{callbacks:{label:ctx=>{const p=HM.pagamentos[ctx.dataIndex];return ' '+p.v+' '+t('v_vendas_s')+' · '+fRec(p.r);}}},
       datalabels:{display:true,color:'#fff',font:{size:10,weight:'bold'},formatter:(v,ctx)=>{const tot=ctx.dataset.data.reduce((a,b)=>a+b,0);return tot>0?(v/tot*100).toFixed(0)+'%':null;}}
     }}
   });
@@ -1778,7 +1743,7 @@ function renderVendas(){
   tblVendas('vendasCriativos',HM.criativos,'Criativo', HL);
 
   const sckDEl=document.getElementById('vendasSckDetalhe');
-  let sckHtml='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr style="background:var(--surface2)"><th style="font-size:9px;padding:6px 10px;text-align:left;color:var(--muted);text-transform:uppercase">SCK Completo</th><th class="num" style="font-size:9px;padding:6px 10px;color:var(--muted);text-transform:uppercase">Vendas</th><th class="num" style="font-size:9px;padding:6px 10px;color:var(--muted);text-transform:uppercase">Receita</th></tr></thead><tbody>';
+  let sckHtml='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr style="background:var(--surface2)"><th style="font-size:9px;padding:6px 10px;text-align:left;color:var(--muted);text-transform:uppercase">'+t('v_sck_col')+'</th><th class="num" style="font-size:9px;padding:6px 10px;color:var(--muted);text-transform:uppercase">'+t('v_vendas_col')+'</th><th class="num" style="font-size:9px;padding:6px 10px;color:var(--muted);text-transform:uppercase">'+t('v_receita_col')+'</th></tr></thead><tbody>';
   HM.sck.forEach(s=>{sckHtml+='<tr><td style="font-size:10px;padding:6px 10px;max-width:350px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+s.n+'">'+s.n+'</td><td class="num" style="font-size:11px;padding:6px 10px">'+s.v+'</td><td class="num" style="font-size:11px;padding:6px 10px;color:'+HL+';font-weight:700">'+fRec(s.r)+'</td></tr>';});
   sckDEl.innerHTML=sckHtml+'</tbody></table></div>';
 }
@@ -1834,11 +1799,11 @@ function onLabelSize(v){
 
 function rerenderActive(){
   const p=document.querySelector('.page-section.active')?.id?.replace('page-','');
-  if(p==='meta')     renderMeta();
-  if(p==='diario')   renderDiario();
-  if(p==='pesquisa') renderPesquisa();
-  if(p==='vendas')     renderVendas();
-  if(p==='vendas-lista') renderVendasLista();
+  if(p==='meta')         renderMeta();
+  if(p==='diario')       renderDiario();
+  if(p==='pesquisa')     renderPesquisa();
+  if(p==='vendas')       renderVendas();
+  applyI18n();
   setTimeout(()=>{Object.values({...CH,...PC}).forEach(c=>{try{c.resize();}catch(e){}});},60);
 }
 
@@ -1896,7 +1861,6 @@ function rerenderActive(){
   if(p==='diario')   renderDiario();
   if(p==='pesquisa')    renderPesquisa();
   if(p==='vendas')       renderVendas();
-  if(p==='vendas-lista') renderVendasLista();
   applyI18n();
   setTimeout(()=>{Object.values({...CH,...PC}).forEach(c=>{try{c.resize();}catch(e){}});},60);
 }
@@ -1907,13 +1871,12 @@ function goPage(p,btn){
   document.querySelectorAll('.sb-item').forEach(e=>e.classList.remove('active'));
   document.getElementById('page-'+p).classList.add('active');
   if(btn) btn.classList.add('active');
-  const titles={meta:t('nav_meta'),diario:t('nav_diario'),pesquisa:t('nav_pesquisa'),'vendas':'Vendas','vendas-lista':'Vendas Diárias'};
+  const titles={meta:t('nav_meta'),diario:t('nav_diario'),pesquisa:t('nav_pesquisa'),vendas:t('nav_vendas')};
   document.getElementById('pageTitle').textContent=titles[p]||p;
   if(p==='meta')     renderMeta();
   if(p==='diario')   renderDiario();
   if(p==='pesquisa')    renderPesquisa();
   if(p==='vendas')       renderVendas();
-  if(p==='vendas-lista') renderVendasLista();
   applyI18n();
   setTimeout(()=>{Object.values({...CH,...PC}).forEach(c=>{try{c.resize();}catch(e){}});},80);
   if(window.innerWidth<=768) closeSb();
