@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <style>
-:root{--bg:#f0f2f7;--surface:#fff;--surface2:#f7f8fc;--border:rgba(0,0,0,.07);--text:#0f1523;--muted:#6b7280;--muted2:#9ca3af;--accent:#e11d48;--sh:0 1px 4px rgba(0,0,0,.06);--r:12px;}
+:root{--bg:#f0f2f7;--surface:#fff;--surface2:#f7f8fc;--border:rgba(0,0,0,.07);--text:#0f1523;--muted:#6b7280;--muted2:#9ca3af;--accent:#e11d48;--hotmart:#ff6b00;--sh:0 1px 4px rgba(0,0,0,.06);--r:12px;}
 [data-theme="dark"]{--bg:#0a0f1e;--surface:#111827;--surface2:#1a2236;--border:rgba(255,255,255,.08);--text:#f0f4ff;--muted:#8b95a9;--muted2:#5a6478;--sh:0 1px 4px rgba(0,0,0,.3);}
 [data-theme="dark"] .sb{background:#060b14;}
 [data-theme="dark"] .tc thead th{background:#1a2236;}
@@ -231,12 +231,6 @@ details.desk-only{display:block!important;}
     </div>
   </nav>
   <div class="sb-lct"><div class="sb-lct-lbl" data-i18n="launch">Lançamento</div><div class="sb-lct-val" id="sbLct">—</div></div>
-
-    <div id="sbVendasGroup" style="display:none">
-      <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1.5px;padding:12px 10px 4px">Vendas</div>
-      <button class="sb-item" onclick="goPage('vendas',this)"><span class="ico">💰</span>Visão Geral</button>
-      <button class="sb-item" onclick="goPage('vendas-lista',this)"><span class="ico">📋</span>Vendas Diárias</button>
-    </div>
   <div class="sb-footer"><span id="sbAtual">--/--/---- · via planilha</span></div>
 </aside>
 
@@ -635,7 +629,7 @@ function applyI18n(){
     el.textContent=t(key);
   });
   // Atualiza título da página e topbar
-  const titles={meta:t('nav_meta'),diario:t('nav_diario'),pesquisa:t('nav_pesquisa'),'vendas':'Vendas','vendas-lista':'Vendas Diárias'};
+  const titles={meta:t('nav_meta'),diario:t('nav_diario'),pesquisa:t('nav_pesquisa')};
   const activeP=document.querySelector('.page-section.active')?.id?.replace('page-','');
   if(activeP && titles[activeP]) document.getElementById('pageTitle').textContent=titles[activeP];
   // Atualiza themeLabel baseado no tema atual
@@ -1705,7 +1699,7 @@ function tblVendas(elId, data, colLbl, receitaCor){
 function renderVendas(){
   if(!HOTMART) return;
   const HM=HOTMART;
-  const fRec=v=>fR(v);
+  const fRec=v=>v==null?'—':'R$'+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
   const HL=getComputedStyle(document.documentElement).getPropertyValue('--hotmart').trim()||'#ff6b00';
 
   // Filtrar daily pelo período
@@ -1906,7 +1900,9 @@ function rerenderActive(){
   const p=document.querySelector('.page-section.active')?.id?.replace('page-','');
   if(p==='meta')     renderMeta();
   if(p==='diario')   renderDiario();
-  if(p==='pesquisa') renderPesquisa();
+  if(p==='pesquisa')    renderPesquisa();
+  if(p==='vendas')       renderVendas();
+  if(p==='vendas-lista') renderVendasLista();
   applyI18n();
   setTimeout(()=>{Object.values({...CH,...PC}).forEach(c=>{try{c.resize();}catch(e){}});},60);
 }
@@ -1917,11 +1913,13 @@ function goPage(p,btn){
   document.querySelectorAll('.sb-item').forEach(e=>e.classList.remove('active'));
   document.getElementById('page-'+p).classList.add('active');
   if(btn) btn.classList.add('active');
-  const titles={meta:t('nav_meta'),diario:t('nav_diario'),pesquisa:t('nav_pesquisa'),'vendas':'Vendas','vendas-lista':'Vendas Diárias'};
+  const titles={meta:t('nav_meta'),diario:t('nav_diario'),pesquisa:t('nav_pesquisa')};
   document.getElementById('pageTitle').textContent=titles[p]||p;
   if(p==='meta')     renderMeta();
   if(p==='diario')   renderDiario();
-  if(p==='pesquisa') renderPesquisa();
+  if(p==='pesquisa')    renderPesquisa();
+  if(p==='vendas')       renderVendas();
+  if(p==='vendas-lista') renderVendasLista();
   applyI18n();
   setTimeout(()=>{Object.values({...CH,...PC}).forEach(c=>{try{c.resize();}catch(e){}});},80);
   if(window.innerWidth<=768) closeSb();
